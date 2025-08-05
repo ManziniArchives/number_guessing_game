@@ -1,17 +1,20 @@
 #!/bin/bash
 
-# Database connection string
+# Number Guessing Game with Database Integration
+# This script generates a random number for users to guess
+
 PSQL="psql --username=freecodecamp --dbname=number_guess -t --no-align -c"
 
 # Generate random number between 1 and 1000
 SECRET_NUMBER=$(( RANDOM % 1000 + 1 ))
 
-# Prompt for username
 echo "Enter your username:"
 read USERNAME
 
-# Check if user exists
+# Check if user exists and get user info
 USER_ID=$($PSQL "SELECT user_id FROM users WHERE username='$USERNAME'")
+
+
 
 if [[ -z $USER_ID ]]
 then
